@@ -7,5 +7,5 @@
 #include "AllFunctions.h"
 
 int validation(char **argv){
-    printf("the number is: %s\n", argv[1]);
+    return 0;
 }
