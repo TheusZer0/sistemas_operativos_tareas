@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[1]) {
+int main(int argc, char *argv[]) {
     if (argc==1){
-        printf("this is the command you choose: %s",argv[1]);
+        printf("this is the command you choose: %s",argv[2]);
     }
     return 0;
 }
