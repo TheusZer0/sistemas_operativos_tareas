@@ -10,7 +10,7 @@
 * @author:
 * @date: 19-10-2020
 * @brief: realiza una validacion completa al dato introducido por comando
- * para determinar si puede convertirse en un entero de tipo int o falla.
+ * para determinar si puede convertirse en un entero positivo de tipo int,
  * en caso de fallar, el programa termina su ejecucion.
 */
 int validation(char *number);

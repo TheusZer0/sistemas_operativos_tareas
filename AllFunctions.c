@@ -11,9 +11,10 @@ int validation(char *number){
     //hace la conversion para int, no para float del char que fue introducido por parametro
     int numb;
     numb = atoi(number);
+    //condicional para determinar si el numero cumple con lo pedido
     if (numb<1){
         printf("valor invalido.\n");
-        return EXIT_FAILURE;
+        return EXIT_FAILURE; //retorna 1
     } else{
         return numb; //retorna el char convertido en numero
     }
