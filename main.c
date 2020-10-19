@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv) {
     if (argc==2){
-        validation((int)argv[1]);
+        validation(argv);
         return 0;
     } else{
         return 1;

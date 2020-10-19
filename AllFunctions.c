@@ -6,6 +6,6 @@
 #include <string.h>
 #include "AllFunctions.h"
 
-int validation(int var){
+int validation(char **argv){
     printf("the number is: %d\n",var);
 }
