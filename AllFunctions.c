@@ -8,7 +8,7 @@
 
 int validation(char *number){
     int numb = atoi(number);
-    printf("%n",&numb);
+    printf("%d",numb);
     //    printf("%s\n",number);
     return 0;
 }
