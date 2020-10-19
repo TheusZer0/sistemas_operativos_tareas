@@ -15,7 +15,6 @@ int validation(char *number){
         printf("Su numero es 0 o corresponde a un valor invalido.\n");
         return 1;
     } else{
-        printf("%d\n",numb);
         return numb; //retorna el char convertido en numero
     }
     //    printf("%d",numb);
