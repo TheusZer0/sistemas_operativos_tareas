@@ -6,9 +6,18 @@
 #include <string.h>
 #include "AllFunctions.h"
 
+//recibe el char como parametro para hacer la validacion
 int validation(char *number){
-    int numb = atoi(number);
-    printf("%d",numb);
+    //hace la conversion para int, no para float del char que fue introducido por parametro
+    int numb;
+    numb = atoi(number);
+    if (numb==0){
+        printf("Su numero es 0 o corresponde a un valor invalido.\n");
+        return 1;
+    } else{
+        printf("%d\n",numb);
+        return numb; //retorna el char convertido en numero
+    }
+    //    printf("%d",numb);
     //    printf("%s\n",number);
-    return 0;
 }
