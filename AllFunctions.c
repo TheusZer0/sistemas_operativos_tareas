@@ -7,6 +7,8 @@
 #include "AllFunctions.h"
 
 int validation(char *number){
-    printf("\n%s\n",number);
+    int numb = atoi(number);
+    printf("%n",&numb);
+    //    printf("%s\n",number);
     return 0;
 }
