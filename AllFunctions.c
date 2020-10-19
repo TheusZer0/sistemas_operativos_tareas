@@ -13,7 +13,7 @@ int validation(char *number){
     numb = atoi(number);
     if (numb==0){
         printf("Su numero es 0 o corresponde a un valor invalido.\n");
-        return 1;
+        return EXIT_FAILURE;
     } else{
         return numb; //retorna el char convertido en numero
     }
