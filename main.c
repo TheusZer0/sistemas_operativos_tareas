@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
 
         void* ptr = C_shared_memory();
         W_shared_memory(ptr);
+        W_shared_memory(ptr);
         RD_shared_memory();
         return 0;
     } else{ //caso contrario, si no cumple retorna 1
