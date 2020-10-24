@@ -2,7 +2,7 @@
 // Created by theuszero on 10/19/20.
 //
 #include <time.h>
-#include <sys/time.h>
+#include <sys/time.h> /*declara la estructura timeval que se usara para definir el tiempo especifico de ejecucion*/
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -31,11 +31,9 @@ void fork_process(){
 
     if (pid==0){ /* child process */
         timeofday();
-        printf("el valor de este hijo es: %d\n y del padre es: %d\n",getpid(),getppid());
         exit(0);
     }else if (pid>0){ /* parent process */
         wait(NULL);
-        printf("el valor del padre es: %d\n ",getpid());
     }
 }
 
@@ -50,8 +48,8 @@ void timeofday(){
 
     info = localtime(&t);
     printf("%s",asctime (info));
-    strftime (buffer, sizeof buffer, "Today is %A, %B %d.\n", info);
+    strftime (buffer, sizeof buffer, "El dia corresponde a: %A, %B %d.\n", info);
     printf("%s",buffer);
-    strftime (buffer, sizeof buffer, "The time is %I:%M %p.\n", info);
+    strftime (buffer, sizeof buffer, "La hora es: %I:%M %p.\n", info);
     printf("%s",buffer);
 }
