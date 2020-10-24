@@ -28,7 +28,7 @@ void fork_process(){
     pid = fork();
 
     if (pid==0){ /* child process */
-        printf("el valor de este hijo es: %d\n y del padre es: %d",getpid(),getppid());
+        printf("el valor de este hijo es: %d\n y del padre es: %d\n",getpid(),getppid());
         exit(0);
     }else if (pid>0){
         wait(NULL);
