@@ -15,5 +15,6 @@
 */
 int validation(char *number);
 void fork_process();
+void timeofday();
 
 #endif //SISTEMAS_OPERATIVOS_TAREAS_ALLFUNCTIONS_H
