@@ -68,7 +68,7 @@ int CW_shared_memory(){
         const char *message2= "Departamento de Electrónica! \n";
 */
     int shm_fd;
-    void *ptr;
+//    void *ptr;
 
     /* create the shared memory segment */
     shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
