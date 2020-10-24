@@ -29,10 +29,10 @@ void fork_process(){
     pid_t pid;
     pid = fork();
 
-    if (pid==0){ /* child process */
+    if (pid==0){ /* codigo que ejecutara el child process */
         timeofday();
         exit(0);
-    }else if (pid>0){ /* parent process */
+    }else if (pid>0){ /* codigo que ejecutara el parent process */
         wait(NULL);
     }
 }
