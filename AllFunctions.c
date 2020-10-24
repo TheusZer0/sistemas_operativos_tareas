@@ -89,9 +89,8 @@ void W_shared_memory(void *ptr, unsigned int number){
     char* str = malloc( length + 1 );
     snprintf( str, length + 1, "%d", number);
 
-//    printf("%s\n\n",str);
-    sprintf(ptr,"%s,",str);
     ptr += strlen(str);
+
 /*
     printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
     sprintf(ptr,"%c",message0);
@@ -127,7 +126,7 @@ int RD_shared_memory(){
 
     /* now read from the shared memory region */
     printf("Lectura realizada desde Región de Memoria Compartida\n");
-    printf("%s",(char *)ptr);
+    printf("%s\n",(char *)ptr);
 
     /* remove the shared memory segment */
     if (shm_unlink(name) == -1) {
