@@ -85,18 +85,19 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, unsigned int number){
+    int length = snprintf( NULL, 0, "%d", number );
+    char* str = malloc( length + 1 );
+    snprintf( str, length + 1, "%d", number);
 
-    const char *message0= "ELO321 ";
-    const char *message1= "Teoría de Sistemas Operativos ";
-    const char *message2= "Departamento de Electrónica! \n";
-
+    printf("%s\n\n",str);
+/*
     printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
-    sprintf(ptr,"%s",message0);
-    ptr += strlen(message0);
-    sprintf(ptr,"%s",message1);
-    ptr += strlen(message1);
-    sprintf(ptr,"%s",message2);
-    ptr += strlen(message2);
+    sprintf(ptr,"%c",message0);
+    ptr += strlen(&message0);
+    sprintf(ptr,"%c",message1);
+    ptr += strlen(&message1);
+    sprintf(ptr,"%c",message2);
+    ptr += strlen(message2);*/
 }
 
 int RD_shared_memory(){
