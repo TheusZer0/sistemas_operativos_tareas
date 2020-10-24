@@ -13,8 +13,6 @@ int main(int argc, char **argv) {
 
         fork_sucesion_Collatz(number);
 
-        void* ptr = C_shared_memory();
-
         RD_shared_memory();
         return 0;
     } else{ //caso contrario, si no cumple retorna 1

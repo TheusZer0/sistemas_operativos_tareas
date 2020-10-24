@@ -84,7 +84,7 @@ void* C_shared_memory(){
     return ptr;
 }
 
-void W_shared_memory(void *ptr, char number){
+void W_shared_memory(void *ptr, unsigned int number){
 
     const char *message0= "ELO321 ";
     const char *message1= "Teoría de Sistemas Operativos ";
@@ -145,17 +145,20 @@ int sucesion_Collatz (unsigned int n){
 void fork_sucesion_Collatz(unsigned int n){
     pid_t pid;
     pid = fork();
+    void* ptr = C_shared_memory();
 
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
-            printf("%d\n",n);
+
+            W_shared_memory(ptr,n);
             n=sucesion_Collatz(n);
-            /* aqui se debe escribir */
+
         }
         while(n != 1);
 
-        // printf("EL NUMERO ES = %d\n",n);
+        W_shared_memory(ptr,n);
+
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
         wait(NULL);
