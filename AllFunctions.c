@@ -89,12 +89,16 @@ void W_shared_memory(void *ptr, unsigned int number){
     char* str = malloc( length + 1 );
     snprintf( str, length + 1, "%d", number);
 
-    printf("%s\n\n",str);
+//    printf("%s\n\n",str);
+    sprintf(ptr,"%s,",str);
+    ptr += strlen(str);
 /*
     printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
     sprintf(ptr,"%c",message0);
+
     ptr += strlen(&message0);
-    sprintf(ptr,"%c",message1);
+
+    c(ptr,"%c",message1);
     ptr += strlen(&message1);
     sprintf(ptr,"%c",message2);
     ptr += strlen(message2);*/
