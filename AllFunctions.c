@@ -150,7 +150,10 @@ void fork_sucesion_Collatz(unsigned int n){
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
+            int contador = 0;
+            contador++;
             n=sucesion_Collatz(n);
+            printf("el contador es %d\n",contador);
         }
         while(n != 1);
         printf("EL NUMERO ES = %d\n",n);
