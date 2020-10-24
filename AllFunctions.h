@@ -19,5 +19,6 @@ void timeofday();
 int CW_shared_memory();
 int RD_shared_memory();
 int sucesion_Collatz (unsigned int n);
+void fork_sucesion_Collatz(unsigned int n);
 
 #endif //SISTEMAS_OPERATIVOS_TAREAS_ALLFUNCTIONS_H

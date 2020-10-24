@@ -142,3 +142,20 @@ int sucesion_Collatz (unsigned int n){
     }
     return n;
 }
+
+void fork_sucesion_Collatz(unsigned int n){
+    pid_t pid;
+    pid = fork();
+
+    if (pid==0){ /* codigo que ejecutara el child process */
+        do
+        {
+            n=sucesion_Collatz(n);
+        }
+        while(n != 1);
+        printf("EL NUMERO ES = %d\n",n);
+        exit(0);
+    }else if (pid>0){ /* codigo que ejecutara el parent process */
+        wait(NULL);
+    }
+}
