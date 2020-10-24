@@ -82,24 +82,9 @@ void* C_shared_memory(){
         return (void *) EXIT_FAILURE;
     }
     return ptr;
-    /**
-     * Now write to the shared memory region.
-      *
-     * Note we must increment the value of ptr after each write.
-     */
-
-/*        printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
-        sprintf(ptr,"%s",message0);
-        ptr += strlen(message0);
-        sprintf(ptr,"%s",message1);
-        ptr += strlen(message1);
-        sprintf(ptr,"%s",message2);
-        ptr += strlen(message2);
-*/
-    return 0;
 }
 
-void W_shared_memory(void *ptr){
+void W_shared_memory(void *ptr, char number){
 
     const char *message0= "ELO321 ";
     const char *message1= "Teoría de Sistemas Operativos ";
