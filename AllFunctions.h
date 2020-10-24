@@ -16,5 +16,7 @@
 int validation(char *number);
 void fork_process();
 void timeofday();
+int CW_shared_memory();
+int RD_shared_memory();
 
 #endif //SISTEMAS_OPERATIVOS_TAREAS_ALLFUNCTIONS_H
