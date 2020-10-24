@@ -24,14 +24,14 @@ int validation(char *number){
 }
 
 void fork_process(){
-    for(int i=0;i<5;i++) // loop will run n times (n=5)
-    {
-        if(fork() == 0)
-        {
-            printf("[son] pid %d from [parent] pid %d\n",getpid(),getppid());
-            exit(0);
-        }
-    }
-    for(int i=0;i<5;i++) // loop will run n times (n=5)
+    pid_t pid;
+    pid = fork();
+
+    if (pid==0){ /* child process */
+        printf("el valor de este hijo es: %d\n y del padre es: %d",getpid(),getppid());
+        exit(0);
+    }else if (pid>0){
         wait(NULL);
+        printf("el valor del padre es: %d\n ",getpid());
+    }
 }
