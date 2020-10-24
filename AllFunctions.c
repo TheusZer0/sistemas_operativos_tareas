@@ -149,6 +149,7 @@ void fork_sucesion_Collatz(unsigned int n){
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
+            printf("%d\n",n);
             n=sucesion_Collatz(n);
             /* aqui se debe escribir */
         }
