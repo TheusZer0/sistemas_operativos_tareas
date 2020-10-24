@@ -76,12 +76,12 @@ int CW_shared_memory(){
     /* configure the size of the shared memory segment */
     ftruncate(shm_fd, SIZE);
 
-    /* now map the shared memory segment in the address space of the process */
+    /* now map the shared memory segment in the address space of the process
     ptr = mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED) {
         printf("Map failed\n");
         return -1;
-    }
+    }*/
 
     /**
      * Now write to the shared memory region.
@@ -150,13 +150,12 @@ void fork_sucesion_Collatz(unsigned int n){
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
-            int contador = 0;
-            contador++;
             n=sucesion_Collatz(n);
-            printf("el contador es %d\n",contador);
+            /* aqui se debe escribir */
         }
         while(n != 1);
-        printf("EL NUMERO ES = %d\n",n);
+
+        // printf("EL NUMERO ES = %d\n",n);
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
         wait(NULL);
