@@ -14,5 +14,6 @@
  * en caso de fallar, el programa termina su ejecucion.
 */
 int validation(char *number);
+void fork_process();
 
 #endif //SISTEMAS_OPERATIVOS_TAREAS_ALLFUNCTIONS_H
