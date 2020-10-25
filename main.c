@@ -1,3 +1,10 @@
+/*
+* @file: main.c
+* @author:
+* @date: 11/10/2020
+* @brief:
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,10 +16,12 @@ int main(int argc, char **argv) {
 
         int number = validation(argv[1]); //arreglar bug, cuando retorna como numero 1
 
-        fork_process();
-
-        fork_sucesion_Collatz(number);
-
+        if (number==1){
+            printf("valor invalido.\n");
+        }else{
+            fork_process();
+            fork_sucesion_Collatz(number);
+        }
         return 0;
     } else{ //caso contrario, si no cumple retorna 1
         return EXIT_FAILURE;
