@@ -85,11 +85,11 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, char* str){
-    if (*str != '1') {
+    if (*str == '1') {
         strcat(ptr, str);
-        strcat(ptr, ",");
     } else{
         strcat(ptr, str);
+        strcat(ptr, ",");
     }
 }
 
