@@ -32,8 +32,8 @@ void timeofday();
 /**
  * @brief        : crea un espacio de memoria compartido, de la forma POSIX, este codigo fue extraido
  * desde el aula misma, configurandolo de manera especifica para el funcionamiento de la tarea.
- * @return       : retorna un puntero void* que representa el mapeo de la
-
+ * @return       : retorna un puntero void* que representa el mapeo al espacio de memoria compartida, cosa de
+ * que sea mas simple interactuar con este espacio, mediante una variable void* ptr.
  */
 void* C_shared_memory();
 
