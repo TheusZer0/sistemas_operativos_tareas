@@ -17,7 +17,7 @@ int validation(char *number);
 void fork_process();
 void timeofday();
 void* C_shared_memory();
-void W_shared_memory(void *ptr, unsigned int number);
+void W_shared_memory(void *ptr, char* str);
 int RD_shared_memory();
 int sucesion_Collatz (unsigned int n);
 void fork_sucesion_Collatz(unsigned int n);

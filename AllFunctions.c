@@ -84,11 +84,9 @@ void* C_shared_memory(){
     return ptr;
 }
 
-void W_shared_memory(void *ptr, unsigned int number){
-    int length = snprintf( NULL, 0, "%d", number );
-    char* str = malloc( length + 1 );
-    snprintf( str, length + 1, "%d", number);
+void W_shared_memory(void *ptr, char* str){
 
+    sprintf(ptr,"%s",str);
     ptr += strlen(str);
 
 /*
@@ -149,19 +147,30 @@ int sucesion_Collatz (unsigned int n){
 void fork_sucesion_Collatz(unsigned int n){
     pid_t pid;
     pid = fork();
+
     void* ptr = C_shared_memory();
+
+    char final_str[2048];
 
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
+            /*convert n into a str */
+            int length = snprintf( NULL, 0, "%d", n );
+            char* str = malloc( length + 1 );
+            snprintf( str, length + 1, "%d", n );
 
-            W_shared_memory(ptr,n);
+            strcat (final_str,str);
+
+            printf("%d\n",n);
+
             n=sucesion_Collatz(n);
 
         }
         while(n != 1);
-
-        W_shared_memory(ptr,n);
+        puts(final_str);
+        printf("%s",final_str);
+        //W_shared_memory(ptr,n);
 
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
