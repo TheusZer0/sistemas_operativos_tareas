@@ -168,8 +168,15 @@ void fork_sucesion_Collatz(unsigned int n){
 
         }
         while(n != 1);
+
+        int length = snprintf( NULL, 0, "%d", n );
+        char* str = malloc( length + 1 );
+        snprintf( str, length + 1, "%d", n );
+
+        strcat(final_str,str);
         puts(final_str);
-        printf("%s",final_str);
+
+        printf("%s\n",final_str);
         //W_shared_memory(ptr,n);
 
         exit(0);
