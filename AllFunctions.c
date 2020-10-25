@@ -173,7 +173,6 @@ void fork_sucesion_Collatz(unsigned int n){
         snprintf( str, length + 1, "%d", n );
 
         strcat(final_str,str);
-        puts(final_str);
 
         W_shared_memory(ptr,final_str);
 
