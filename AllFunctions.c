@@ -1,6 +1,12 @@
-//
-// Created by theuszero on 10/19/20.
-//
+/*
+* @file: AllFunctions.c
+* @author:
+* @date: 19-10-2020
+* @brief: realiza una validacion completa al dato introducido por comando
+ * para determinar si puede convertirse en un entero positivo de tipo int,
+ * en caso de fallar, el programa termina su ejecucion.
+*/
+
 #include <time.h>
 #include <sys/time.h> /*declara la estructura timeval que se usara para definir el tiempo especifico de ejecucion*/
 #include <stdio.h>
