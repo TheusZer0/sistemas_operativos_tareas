@@ -163,9 +163,10 @@ void fork_sucesion_Collatz(unsigned int n){
             char* str = malloc( length + 1 );
             snprintf( str, length + 1, "%d", n );
 
-            W_shared_memory(ptr,str);
+            printf("EL NUMERO ES: %s\n",str);
 
-            printf("EL NUMERO ES: %d\n",n);
+
+            W_shared_memory(ptr,str);
 
             n=sucesion_Collatz(n);
 
