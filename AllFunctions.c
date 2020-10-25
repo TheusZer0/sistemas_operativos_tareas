@@ -85,11 +85,11 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, char* str){
-    printf("%s\n\n",str);
     if (str != "1") {
+        printf("HERE IS JONY\n",str);
         strcat(ptr, str);
         strcat(ptr, ",");
-    } else {
+    } else{
         strcat(ptr, str);
     }
 
