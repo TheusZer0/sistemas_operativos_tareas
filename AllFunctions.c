@@ -123,7 +123,7 @@ int RD_shared_memory(){
     }
 
     /* now read from the shared memory region */
-    printf("Lectura realizada desde Región de Memoria Compartida\n");
+    printf("La lectura realizada desde la Región de la Memoria Compartida que fue creada corresponde a:\n");
     printf("%s\n",(char *)ptr);
 
     /* remove the shared memory segment */
