@@ -13,7 +13,6 @@ int main(int argc, char **argv) {
 
         fork_sucesion_Collatz(number);
 
-        RD_shared_memory();
         return 0;
     } else{ //caso contrario, si no cumple retorna 1
         return EXIT_FAILURE;

@@ -167,5 +167,6 @@ void fork_sucesion_Collatz(unsigned int n){
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
         wait(NULL);
+        RD_shared_memory();
     }
 }
