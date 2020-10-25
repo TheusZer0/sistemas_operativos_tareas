@@ -91,7 +91,8 @@ void W_shared_memory(void *ptr, char* str){
     strcat(ptr,",");
     strcat(ptr,str);
     strcat(ptr,",");
-
+    strcat(ptr,str);
+    strcat(ptr,",");
     /**
      * Now write to the shared memory region.
       *
