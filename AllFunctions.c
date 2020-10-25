@@ -163,7 +163,6 @@ void fork_sucesion_Collatz(unsigned int n){
             strcat(final_str,str);
             strcat(final_str,",");
 
-
             n=sucesion_Collatz(n);
 
         }
