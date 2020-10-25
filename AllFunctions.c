@@ -86,21 +86,14 @@ void* C_shared_memory(){
 
 void W_shared_memory(void *ptr, char* str){
 
-    strcat(ptr,str);
-    strcat(ptr,",");
+    if (str=='1'){
+        strcat(ptr,str);
+    }else{
+        strcat(ptr,str);
+        strcat(ptr,",");
+    }
 
-    /**
-     * Now write to the shared memory region.
-      *
-     * Note we must increment the value of ptr after each write.
-    printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
-    sprintf(ptr,"%s",message0);
-    ptr += strlen(message0);
-    sprintf(ptr,"%s",message1);
-    ptr += strlen(message1);
-    sprintf(ptr,"%s",message2);
-    ptr += strlen(message2);
-    */
+
 }
 
 int RD_shared_memory(){
