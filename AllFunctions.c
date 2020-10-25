@@ -86,13 +86,12 @@ void* C_shared_memory(){
 
 void W_shared_memory(void *ptr, char* str){
 
-    if (str=='1'){
-        strcat(ptr,str);
-    }else{
-        strcat(ptr,str);
-        strcat(ptr,",");
+    if (str != "1") {
+        strcat(ptr, str);
+        strcat(ptr, ",");
+    } else {
+        strcat(ptr, str);
     }
-
 
 }
 
@@ -153,16 +152,13 @@ void fork_sucesion_Collatz(unsigned int n){
             char* str = malloc( length + 1 );
             snprintf( str, length + 1, "%d", n );
 
-            printf("EL NUMERO ES: %s\n",str);
-
-
             W_shared_memory(ptr,str);
 
             n=sucesion_Collatz(n);
 
         }
         while(n != 1);
-
+        /*convert n into a str */
         int length = snprintf( NULL, 0, "%d", n );
         char* str = malloc( length + 1 );
         snprintf( str, length + 1, "%d", n );
