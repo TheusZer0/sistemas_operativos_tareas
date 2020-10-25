@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
         }
         return 0;
     } else{ //caso contrario, si no cumple retorna 1
+        printf("ingreso un parametro mas por la linea de comandos, esto es invalido.\n");
         return EXIT_FAILURE;
     }
 }
