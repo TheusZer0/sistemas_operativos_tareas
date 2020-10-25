@@ -164,6 +164,8 @@ void fork_sucesion_Collatz(unsigned int n){
 
             W_shared_memory(ptr,str);
 
+            printf("EL NUMERO ES: %d",n);
+
             n=sucesion_Collatz(n);
 
         }
