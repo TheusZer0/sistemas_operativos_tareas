@@ -176,8 +176,7 @@ void fork_sucesion_Collatz(unsigned int n){
         strcat(final_str,str);
         puts(final_str);
 
-        printf("%s\n",final_str);
-        //W_shared_memory(ptr,n);
+        W_shared_memory(ptr,final_str);
 
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
