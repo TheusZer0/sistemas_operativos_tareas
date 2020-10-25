@@ -38,9 +38,12 @@ void timeofday();
 void* C_shared_memory();
 
 /**
- * @brief        :
- * @param headRef:
- * @return       :
+ * @brief        : funcion que escribe dentro de la memoria compartida, esta funcion concadena los numeros
+ * que son entregados mediante parametro de la misma funcion (el numero corresponderia al parametro char* str)
+ * y tambien recibe el mapeo como un void *ptr, asi, una vez entregado esto, la funcion escribe sobre la memoria compartida el char* str,
+ * si este char es un numero diferente de 1, entonces lo concadena con una ",", en caso de que si sea un 1, este solo concadena con el numero, sin una ",".
+ * @param void *ptr: parametro que corresponde al mapeo del espacio de memoria compartida, este se recibe gracias a la funcion void* C_shared_memory().
+ * @param char* str: numero convertido en un char* que sera escrito en la memoria compartida.
  */
 void W_shared_memory(void *ptr, char* str);
 
