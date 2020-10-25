@@ -85,7 +85,7 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, char* str){
-
+    printf("%s\n\n",str);
     if (str != "1") {
         strcat(ptr, str);
         strcat(ptr, ",");
