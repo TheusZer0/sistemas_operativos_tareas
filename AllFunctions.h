@@ -52,9 +52,10 @@ void W_shared_memory(void *ptr, char* str);
 int RD_shared_memory();
 
 /**
- * @brief        :
- * @param headRef:
- * @return       :
+ * @brief        : recibe el número positivo como argumento y retorna el siguiente número generado de la
+ * sucesión Collatz, implementando el algoritmo antes mencionado.
+ * @param unsigned int n: corresponde al número positivo
+ * @return       :retorna el siguiente número generado de la sucesión Collatz
  */
 int sucesion_Collatz (unsigned int n);
 
