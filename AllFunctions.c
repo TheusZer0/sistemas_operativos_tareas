@@ -158,11 +158,11 @@ void fork_sucesion_Collatz(unsigned int n){
             /*convert n into a str */
             int length = snprintf( NULL, 0, "%d", n );
             char* str = malloc( length + 1 );
-            snprintf( str, length + 1, "%d,", n );
+            snprintf( str, length + 1, "%d", n );
 
-            strcat (final_str,str);
+            strcat(final_str,str);
+            strcat(final_str,",");
 
-            printf("%d\n",n);
 
             n=sucesion_Collatz(n);
 
