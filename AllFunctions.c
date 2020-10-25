@@ -85,7 +85,7 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, char* str){
-    if (str != "1") {
+    if (str[0] != '1') {
         printf("HERE IS JONNY: %s\n\n",str);
         strcat(ptr, str);
         strcat(ptr, ",");
