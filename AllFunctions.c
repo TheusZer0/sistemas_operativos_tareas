@@ -143,13 +143,14 @@ void fork_sucesion_Collatz(unsigned int n){
 
     void* ptr = C_shared_memory();
 
+    /*convert n into a str */
+    int length = snprintf( NULL, 0, "%d", n );
+    char* str = malloc( length + 1 );
+    snprintf( str, length + 1, "%d", n );
+
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
-            /*convert n into a str */
-            int length = snprintf( NULL, 0, "%d", n );
-            char* str = malloc( length + 1 );
-            snprintf( str, length + 1, "%d", n );
 
             W_shared_memory(ptr,str);
 
@@ -157,10 +158,6 @@ void fork_sucesion_Collatz(unsigned int n){
 
         }
         while(n != 1);
-        /*convert n into a str */
-        int length = snprintf( NULL, 0, "%d", n );
-        char* str = malloc( length + 1 );
-        snprintf( str, length + 1, "%d", n );
 
         W_shared_memory(ptr,str);
 
