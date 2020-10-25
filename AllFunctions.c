@@ -87,18 +87,20 @@ void* C_shared_memory(){
 void W_shared_memory(void *ptr, char* str){
 
     sprintf(ptr,"%s",str);
-    ptr += strlen(str);
+    strcat(ptr,str);
 
-/*
+	/**
+	 * Now write to the shared memory region.
+ 	 *
+	 * Note we must increment the value of ptr after each write.
     printf("Productor Escribiendo mensaje en Región de Memoria Compartida\n");
-    sprintf(ptr,"%c",message0);
-
-    ptr += strlen(&message0);
-
-    c(ptr,"%c",message1);
-    ptr += strlen(&message1);
-    sprintf(ptr,"%c",message2);
-    ptr += strlen(message2);*/
+    sprintf(ptr,"%s",message0);
+    ptr += strlen(message0);
+    sprintf(ptr,"%s",message1);
+    ptr += strlen(message1);
+    sprintf(ptr,"%s",message2);
+    ptr += strlen(message2);
+    */
 }
 
 int RD_shared_memory(){
@@ -150,8 +152,6 @@ void fork_sucesion_Collatz(unsigned int n){
 
     void* ptr = C_shared_memory();
 
-    char final_str[2048];
-
     if (pid==0){ /* codigo que ejecutara el child process */
         do
         {
@@ -160,8 +160,7 @@ void fork_sucesion_Collatz(unsigned int n){
             char* str = malloc( length + 1 );
             snprintf( str, length + 1, "%d", n );
 
-            strcat(final_str,str);
-            strcat(final_str,",");
+            W_shared_memory(ptr,str);
 
             n=sucesion_Collatz(n);
 
@@ -172,9 +171,7 @@ void fork_sucesion_Collatz(unsigned int n){
         char* str = malloc( length + 1 );
         snprintf( str, length + 1, "%d", n );
 
-        strcat(final_str,str);
-
-        W_shared_memory(ptr,final_str);
+        W_shared_memory(ptr,str);
 
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
