@@ -85,7 +85,8 @@ void* C_shared_memory(){
 }
 
 void W_shared_memory(void *ptr, char* str){
-    if (*str == '1') {
+    int number = atoi(str);
+    if (number == 1) {
         strcat(ptr, str);
     } else{
         strcat(ptr, str);
