@@ -43,6 +43,7 @@ void fork_process(){
         timeofday();
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
+        sleep(30);
         wait(NULL);
     }
 }
