@@ -4,6 +4,10 @@
 
 int numArray [50];
 
+float avg_value;
+int min_value;
+int max_value;
+
 pthread_t ID1, ID2, ID3;
 
 void insert_numArray();
@@ -12,10 +16,6 @@ void* return_min(void* null);
 void* return_max(void* null);
 
 void main(){
-
-    float avg_value;
-    int min_value;
-    int max_value;
 
     insert_numArray();
     pthread_t tid[3];
