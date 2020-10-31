@@ -34,9 +34,9 @@ void main(){
     pthread_join(tid[1],NULL);
     pthread_join(tid[2],NULL);
 
-    pthread_t IDs[3] = {ID1, ID2, ID3};
+    pthread_t threadID[3] = {ID1, ID2, ID3};
 
-    printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",IDs[0],avg_value,IDs[1],min_value,IDs[2],max_value);
+    printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",threadID[0],avg_value,threadID[1],min_value,threadID[2],max_value);
 }
 
 
