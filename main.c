@@ -1,30 +1,85 @@
-/*
-* @file: main.c
-* @author:
-* @date: 11/10/2020
-* @brief:
-*/
+//
+// Created by theuszero on 10/30/20.
+//
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "AllFunctions.h"
+#include <time.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-int main(int argc, char **argv) {
-    //si se ingresa solo un comando mas aparte del ./program entonces cumple y ejecuta el programa
-    if (argc==2){
+int numArray [50];
 
-        int number = validation(argv[1]); //arreglar bug, cuando retorna como numero 1
+float avg_value;
+int min_value;
+int max_value;
 
-        if (number==1){
-            printf("valor invalido.\n");
+void insert_numArray();
+void* return_Avg(void* null);
+void* return_Min(void* null);
+void* return_Max(void* null);
+
+int main(int argc, char **argv){
+
+    insert_numArray(); //creacion del array
+
+    pthread_t tid;
+    pthread_attr_t attr;
+
+    pthread_attr_init(&attr);
+    pthread_create(&tid, &attr, return_Avg, argv);
+    pthread_join(tid,NULL);
+
+    printf("\n%f\n",avg_value);
+
+
+    return 0;
+}
+
+void insert_numArray()
+{
+    int numb;
+    // Use current time as seed for random generator
+    srand(time(0));
+
+    for(int i = 0; i<50; i++){
+        numb=rand()%100;
+        if ((numb>0)&&(numb<=100)){
+            numArray[i]=numb;
         }else{
-            fork_process();
-            fork_sucesion_Collatz(number);
+            --i;
         }
-        return 0;
-    } else{ //caso contrario, si no cumple retorna 1
-        printf("ingreso un parametro mas por la linea de comandos, esto es invalido.\n");
-        return EXIT_FAILURE;
     }
+}
+
+void* return_Avg(void* null){
+    float count = 0;
+    for (int i = 0; i < 50; ++i) {
+        count = count+numArray[i];
+    }
+    count=count/50;
+    avg_value=count;
+    return null;
+}
+
+void* return_Min(void* null){
+    int c, location = 0;
+
+    for (c = 1; c < 50; c++)
+        if (numArray[c] < numArray[location])
+            location = c;
+    min_value = numArray[location];
+    return 0;
+}
+
+void* return_Max(void* null){
+    int location = 0;
+    for (int i = 0; i < 50; ++i) {
+        if (numArray[i] > numArray[location])
+            location = i;
+    }
+    max_value = numArray[location];
 }
