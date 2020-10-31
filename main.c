@@ -3,9 +3,6 @@
 #include <stdlib.h>
 
 int numArray [50];
-float avg_value;
-int min_value;
-int max_value;
 
 pthread_t ID1, ID2, ID3;
 
@@ -15,6 +12,10 @@ void* return_min(void* null);
 void* return_max(void* null);
 
 void main(){
+
+    float avg_value;
+    int min_value;
+    int max_value;
 
     insert_numArray();
     pthread_t tid[3];
@@ -36,14 +37,13 @@ void main(){
     pthread_join(tid[2],NULL);
 
 
-    printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",ID1,avg_value,ID2,min_value,ID3,max_value);
+    printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",IDs[0],avg_value,ID2,min_value,ID3,max_value);
 }
 
 
 void insert_numArray()
 {
     int numb;
-    // Use current time as seed for random generator
     srand(time(0));
 
     for(int i = 0; i<50; i++){
@@ -64,7 +64,6 @@ void* return_avg(void* null){
     }
     count=count/50;
     avg_value=count;
-    printf("average = %lu\n",pthread_self()); //eliminar esta linea
     return null;
 }
 
@@ -76,7 +75,6 @@ void* return_min(void* null){
         if (numArray[c] < numArray[location])
             location = c;
     min_value = numArray[location];
-    printf("minimo = %lu\n",pthread_self()); //eliminar esta linea
     return 0;
 }
 
@@ -88,5 +86,4 @@ void* return_max(void* null){
             location = i;
     }
     max_value = numArray[location];
-    printf("maximo = %lu\n",ID3); // eliminar esta linea
 }
