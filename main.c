@@ -20,8 +20,6 @@ void main(){
     insert_numArray();
     pthread_t tid[3];
     pthread_attr_t attr[3];
-    pthread_t IDs[3] = {ID1, ID2, ID3};
-
     /* se crean los 3 thread*/
     pthread_attr_init(&attr[0]);
     pthread_create(&tid[0], &attr[0], return_avg, NULL);
@@ -36,6 +34,7 @@ void main(){
     pthread_join(tid[1],NULL);
     pthread_join(tid[2],NULL);
 
+    pthread_t IDs[3] = {ID1, ID2, ID3};
 
     printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",IDs[1],avg_value,ID2,min_value,ID3,max_value);
 }
