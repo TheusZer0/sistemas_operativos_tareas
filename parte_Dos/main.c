@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-int numArray [50];
+int numArray [50]; //arreglo de numeros al azar
 
 float avg_value;
 int min_value;
@@ -10,9 +10,28 @@ int max_value;
 
 pthread_t ID1, ID2, ID3;
 
+/**
+ * @brief        : funcion que recorre el array de datos insertando en este
+ * numeros al azar desde el 1 al 100, en total son 50 numeros que seran ingresados
+ * al arreglo
+ */
 void insert_numArray();
+
+/**
+ * @brief        : realiza el calculo del valor promedio que contiene el array
+ * global llamado numArray.
+ */
 void* return_avg(void* null);
+
+/**
+ * @brief        :
+ */
 void* return_min(void* null);
+
+/**
+ * @brief        : realiza el calculo del valor maximo que contiene el array
+ * global llamado numArray.
+ */
 void* return_max(void* null);
 
 void main(){
@@ -37,7 +56,6 @@ void main(){
     pthread_t threadID[3] = {ID1, ID2, ID3};
 
     printf(" Thread ID: %lu calculó promedio y su valor es %f.\n Thread ID: %lu calculó mínimo y su valor es %d.\n Thread ID: %lu calculó máximo y su valor es %d.\n",threadID[0],avg_value,threadID[1],min_value,threadID[2],max_value);
-    printf("\n\n%lu\n%lu",ID1,ID2);
 }
 
 
@@ -56,7 +74,7 @@ void insert_numArray()
     }
 }
 
-void* return_avg(void* null){
+void* return_avg(){
     ID1 = pthread_self();
     float count = 0;
     for (int i = 0; i < 50; ++i) {
@@ -64,10 +82,10 @@ void* return_avg(void* null){
     }
     count=count/50;
     avg_value=count;
-    return null;
+    return 0;
 }
 
-void* return_min(void* null){
+void* return_min(){
     ID2 = pthread_self();
     int c, location = 0;
 
@@ -78,7 +96,7 @@ void* return_min(void* null){
     return 0;
 }
 
-void* return_max(void* null){
+void* return_max(){
     ID3 = pthread_self();
     int location = 0;
     for (int i = 0; i < 50; ++i) {
