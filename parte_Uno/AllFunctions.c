@@ -1,7 +1,7 @@
 /*
 * @file: AllFunctions.c
 * @author: Robert Parra
- *
+*          Jared Soto
 * @date: 11/10/2020
 * @brief: realiza una validacion completa al dato introducido por comando
  * para determinar si puede convertirse en un entero positivo de tipo int,

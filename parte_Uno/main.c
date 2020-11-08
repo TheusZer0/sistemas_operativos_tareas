@@ -1,6 +1,7 @@
 /*
 * @file: main.c
-* @author:
+* @author: Robert Parra
+*          Jared Soto
 * @date: 11/10/2020
 * @brief:
 */

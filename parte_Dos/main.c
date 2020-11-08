@@ -1,7 +1,7 @@
 /*
-* @file: Main.c
-* @author: Robert Parra Jared Soto
- *
+* @file: main.c
+* @author: Robert Parra
+*          Jared Soto
 * @date: 11/10/2020
 * @brief: crea 3 thread que realizan el calculo de promedio, valor máximo, valor mínimo de un arreglo.
 */
