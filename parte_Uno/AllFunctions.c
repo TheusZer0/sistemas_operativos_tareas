@@ -3,9 +3,7 @@
 * @author: Robert Parra
 *          Jared Soto
 * @date: 11/10/2020
-* @brief: realiza una validacion completa al dato introducido por comando
- * para determinar si puede convertirse en un entero positivo de tipo int,
- * en caso de fallar, el programa termina su ejecucion.
+* @brief: Código para tarea 01 en ELO 321, semestre 2020-2
 */
 
 #include <time.h>

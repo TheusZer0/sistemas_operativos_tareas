@@ -3,7 +3,7 @@
 * @author: Robert Parra
 *          Jared Soto
 * @date: 11/10/2020
-* @brief:
+* @brief: Código para tarea 01 en ELO 321, semestre 2020-2
 */
 
 #include <stdio.h>
