@@ -96,7 +96,6 @@ void* return_avg(void* ptr_avg_value){
     }
     count=count/50;
     *avg_value=count;
-    return null;
 }
 
 void* return_min(void* ptr_min_value){
