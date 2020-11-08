@@ -1,3 +1,11 @@
+/*
+* @file: Main.c
+* @author: Robert Parra Jared Soto
+ *
+* @date: 11/10/2020
+* @brief: crea 3 thread que realizan el calculo de promedio, valor máximo, valor mínimo de un arreglo.
+*/
+
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -11,25 +19,26 @@ int max_value;
 pthread_t ID1, ID2, ID3;
 
 /**
- * @brief        : funcion que recorre el array de datos insertando en este
- * numeros al azar desde el 1 al 100, en total son 50 numeros que seran ingresados
+ * @brief        : función que recorre el array de datos insertando en este
+ * números al azar desde el 1 al 100, en total son 50 números que serán ingresados
  * al arreglo
  */
 void insert_numArray();
 
 /**
- * @brief        : realiza el calculo del valor promedio que contiene el array
+ * @brief        : realiza el cálculo del valor promedio que contiene el array
  * global llamado numArray.
  */
 void* return_avg(void* null);
 
 /**
- * @brief        :
+ * @brief        : realiza el cálculo del valor mínimo que contiene el array.
+ * global llamado numArray.
  */
 void* return_min(void* null);
 
 /**
- * @brief        : realiza el calculo del valor maximo que contiene el array
+ * @brief        : realiza el cálculo del valor máximo que contiene el array.
  * global llamado numArray.
  */
 void* return_max(void* null);
@@ -65,7 +74,7 @@ void main(){
 void insert_numArray()
 {
     int numb;
-    srand(time(0));
+    srand(time(0)); // Es una función que permite que con cada ejecución del programa, se obtengan números random.
 
     for(int i = 0; i<50; i++){
         numb=rand()%100;
@@ -78,9 +87,9 @@ void insert_numArray()
 }
 
 void* return_avg(void* ptr_avg_value){
-    ID1 = pthread_self();
+    ID1 = pthread_self();  // obtiene el ID del thread que realiza esta función.
     float *avg_value;
-    avg_value = (float *)ptr_avg_value;
+    avg_value = (float *)ptr_avg_value;  // asigna el puntero de la varibale que queremos cambiar.
     float count = 0;
     for (int i = 0; i < 50; ++i) {
         count = count+numArray[i];
@@ -91,9 +100,9 @@ void* return_avg(void* ptr_avg_value){
 }
 
 void* return_min(void* ptr_min_value){
-    ID2 = pthread_self();
+    ID2 = pthread_self(); // obtiene el ID del thread que realiza esta función.
     int *min_value;
-    min_value = (int *)ptr_min_value;
+    min_value = (int *)ptr_min_value; // asigna el puntero de la varibale que queremos cambiar.
     int c, location = 0;
 
     for (c = 1; c < 50; c++)
@@ -104,9 +113,9 @@ void* return_min(void* ptr_min_value){
 }
 
 void* return_max(void* ptr_max_value){
-    ID3 = pthread_self();  
+    ID3 = pthread_self();  // obtiene el ID del thread que realiza esta función.
     int *max_value;
-    max_value = (int *)ptr_max_value;
+    max_value = (int *)ptr_max_value; // asigna el puntero de la varibale que queremos cambiar.
     int location = 0;
     for (int i = 0; i < 50; ++i) {
         if (numArray[i] > numArray[location])
