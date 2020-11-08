@@ -1,6 +1,7 @@
 /*
 * @file: AllFunctions.c
-* @author:
+* @author: Robert Parra
+ *
 * @date: 11/10/2020
 * @brief: realiza una validacion completa al dato introducido por comando
  * para determinar si puede convertirse en un entero positivo de tipo int,
@@ -43,20 +44,21 @@ void fork_process(){
         timeofday();
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
-        sleep(30);
         wait(NULL);
     }
 }
 
 void timeofday(){
-    struct timeval tv;
+    /* llamada al sistema con gettimeofday y localtime en base a el manual linux ma7 */
+    struct timeval tv; /* struct sacada de la libreria */
     time_t t;
     struct tm *info;
     char buffer[64];
 
-    gettimeofday(&tv, NULL);
+    gettimeofday(&tv, NULL); // llamada al sistema
     t = tv.tv_sec;
 
+    /* print process */
     info = localtime(&t);
     printf("%s",asctime (info));
     strftime (buffer, sizeof buffer, "El dia corresponde a: %A, %B %d.\n", info);
@@ -69,28 +71,28 @@ void* C_shared_memory(){
     const int SIZE = 4096;
     const char *name = "/shm-sucesion_Collatz";
 
-/*        const char *message0= "ELO321 ";
-        const char *message1= "Teoría de Sistemas Operativos ";
-        const char *message2= "Departamento de Electrónica! \n";
-*/
     int shm_fd;
     void *ptr;
 
-    /* create the shared memory segment */
+    /* crear el segmento de memoria compartida */
     shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
 
-    /* configure the size of the shared memory segment */
+    /* configurar el largo del segmento de memoria compartida */
     ftruncate(shm_fd, SIZE);
 
+    /* mapeo al segmento de memoria compartida */
     ptr = mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED) {
         printf("Map failed\n");
         return (void *) EXIT_FAILURE;
     }
-    return ptr;
+    return ptr; /* retorna el mapeo para su facil uso */
 }
 
 void W_shared_memory(void *ptr, char* str){
+
+    /* insertar numbs en la memoria compartida */
+
     int number = atoi(str);
     if (number == 1) {
         strcat(ptr, str);
@@ -114,18 +116,18 @@ int RD_shared_memory(){
         exit(-1);
     }
 
-    /* now map the shared memory segment in the address space of the process */
+    /* volvemos a mapear el segmento de memoria compartida */
     ptr = mmap(0,SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
     if (ptr == MAP_FAILED) {
         printf("Map failed\n");
         exit(-1);
     }
 
-    /* now read from the shared memory region */
+    /* leemos el segmento de memoria compartida */
     printf("La lectura realizada desde la Región de la Memoria Compartida que fue creada corresponde a:\n");
     printf("%s\n",(char *)ptr);
 
-    /* remove the shared memory segment */
+    /* se elimina el segmento de memoria compartida */
     if (shm_unlink(name) == -1) {
         printf("Error removing %s\n",name);
         exit(-1);
@@ -163,7 +165,7 @@ void fork_sucesion_Collatz(unsigned int n){
 
         }
         while(n != 1);
-        /*convert n into a str */
+        /* convert n into a str */
         int length = snprintf( NULL, 0, "%d", n );
         char* str = malloc( length + 1 );
         snprintf( str, length + 1, "%d", n );
@@ -172,6 +174,7 @@ void fork_sucesion_Collatz(unsigned int n){
 
         exit(0);
     }else if (pid>0){ /* codigo que ejecutara el parent process */
+        sleep(30);
         wait(NULL);
         RD_shared_memory();
     }

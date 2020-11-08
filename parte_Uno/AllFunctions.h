@@ -48,9 +48,8 @@ void* C_shared_memory();
 void W_shared_memory(void *ptr, char* str);
 
 /**
- * @brief        :
- * @param headRef:
- * @return       :
+ * @brief        : Lee y elimina el segmento de memoria asignado anteriormente
+ * @return       : retorna el codigo de exito 0 o -1 si este falla
  */
 int RD_shared_memory();
 
@@ -67,9 +66,6 @@ int sucesion_Collatz (unsigned int n);
  * donde el proceso hijo ejecutara la funcion "int sucesion_Collatz (unsigned int n);" en un bucle hasta obtener el numero 1
  * insertando los valores dentro de un espacio de memoria compartido. Una vez el proceso hijo termina generando los numeros
  * de la sucesión Collatz e insertandolos en la memoria compartida, entonces el proceso padre que estaba en la espera puede ejecutar sus sentencias.
- * EXPLICAR PADRE
- * EXPLICAR PADRE
- * EXPLICAR PADRE
  * @param unsigned int n: recibe como argumento el numero entero positivo al que se le aplicara la sucesión Collatz.
  */
 void fork_sucesion_Collatz(unsigned int n);
