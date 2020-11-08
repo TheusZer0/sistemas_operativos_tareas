@@ -109,7 +109,7 @@ int RD_shared_memory(){
     int shm_fd;
     void *ptr;
 
-    /* open the shared memory segment */
+    /* abrir el segmento de memoria compartida */
     shm_fd = shm_open(name, O_RDONLY, 0666);
     if (shm_fd == -1) {
         printf("shared memory failed\n");
