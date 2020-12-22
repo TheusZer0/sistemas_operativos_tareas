@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
+
+int validity_check(int, int, int, int); //chequea solucion de sudoku
+
+struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col);
+
+void col_check(int);  // chequea columnas
+
+void row_check(int); // chequea filas
+
+void grid_check(int, int, int, int); //chequea los sub cuadrados
+
+int nro_grid(int, int, int, int);
+
 int sudoku_array[9][9] =  {
         {6, 2, 4, 5, 3, 9, 1, 8, 7},
         {5, 1, 9, 7, 2, 8, 6, 3, 4},
@@ -18,28 +31,22 @@ int rows_checked[9];
 int cols_checked[9];
 int sub_grids_checked[9];
 
-int validity_check(int, int, int, int); //chequea solucion de sudoku
-void col_check(int);  // chequea columnas
-void row_check(int); // chequea filas
-void grid_check(int, int, int, int); //chequea los sub cuadrados
-int nro_grid(int, int, int, int);
-
-typedef struct {
+struct sdk
+{
     int init_row; // fila inicial
     int fin_row; // fila final
     int init_col; // columna inicial
     int fin_col; // columna final
-}pos;
+};
 
-pos posiciones = {0,0,0,0};
+int main(){
 
-void main(){
-    int i, flag;
-    for(i = 0; i < 9; i++){
+    /*
+    for(int i = 0; i < 9; i++){
         rows_checked[i] = 0;
         cols_checked[i] = 0;
         sub_grids_checked[i] = 0;
-    }
+    }*/
 
     /*
     printf("%d\n",rows_checked[5]);
@@ -55,7 +62,6 @@ void main(){
     grid_check(3,5,3,5);
     printf("%d\n",sub_grids_checked[4]);
 
-
     /*
     if (flag)
       printf("La solucion correcta\n");
@@ -63,27 +69,35 @@ void main(){
       printf("La solución NO es correcta\n");
     */
 
+    return 0;
+}
+
+struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col){
+    struct sdk p1;
+    p1.init_row = init_row;
+    p1.fin_row = fin_row;
+    p1.init_col = init_col;
+    p1.fin_col = fin_col;
+    return p1;
 }
 
 int validity_check(int xi, int yi, int xf, int yf){
+
+    struct sdk posiciones = create_the_struct(0,0,0,0);
     posiciones.init_row = xi;
     posiciones.fin_row = xf;
     posiciones.init_col = yi;
     posiciones.fin_col = yf;
-    int x,y,i;
 
-    for (x = xi; x < xf; x++) {
+    for (int x = xi; x < xf; x++) {
         /* pregunta si todas las filas sirven */
         row_check(x);
     }
-    for (y = yi; y < yf; y++) {
+    for (int y = yi; y < yf; y++) {
         /* pregunta si todas las columnas sirven */
         col_check(y);
     }
-
-
-
-    for (i = 0; i < 9; i++) {
+    for (int i = 0; i < 9; i++) {
         /* verifica los arreglos para saber si estamos ante una solucion */
         if (rows_checked[i] == 0 || cols_checked[i] == 0 || sub_grids_checked[i] == 0)
             return 0;
@@ -97,6 +111,7 @@ void row_check(int i){
     for (k = 0; k < 9; k++) {
         /* recorre las columnas y actualiza el arreglo temporal */
         var = sudoku_array[i][k];
+        printf(" valor : %d ",sudoku_array[i][k]);
         tmp[var - 1] = 1;
     }
     for (k = 0; k < 9; k++) {
@@ -110,7 +125,6 @@ void row_check(int i){
             rows_checked[i] = 1;
         }
     }
-
 }
 
 void col_check(int i){
@@ -120,6 +134,7 @@ void col_check(int i){
         /* recorre las columnas y actualiza el arreglo temporal */
         var = sudoku_array[k][i];
         tmp[var - 1] = 1;
+        printf(" %d ",var);
     }
     for (k = 0; k < 9; k++) {
         /* consulta el arreglo temporal */
