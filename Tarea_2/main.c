@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
+
+struct timeval tv1, tv2;
 
 struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col);
 
@@ -57,8 +60,12 @@ int sudoku_array[9][9] = {
 };
 
 int main(){
+    gettimeofday(&tv1, NULL);
+/* stuff to do! */
     struct sdk page = create_the_struct(1,1,0,8);
     validity_check(page);
+    gettimeofday(&tv2, NULL);
+    printf("Time = %f sec\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec));
     return 0;
 }
 
