@@ -2,8 +2,6 @@
 // Created by theuszero on 12/20/20.
 //
 
-
-
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,7 +9,23 @@
 
 struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col);
 
-void validate(int init_row, int fin_row, int init_col, int fin_col);
+void gridcheck(int init_row, int fin_row, int init_col, int fin_col);
+
+/* Row */
+int row_assignement(int init_row);
+
+void row_check();
+
+/* Column */
+
+int column_assignement(int init_column);
+
+int column_check();
+
+/* Others */
+
+int found_duplicate(int cont[], int size);
+
 
 struct sdk
 {
@@ -33,16 +47,18 @@ int sudoku_array[9][9] = {
         {2, 8, 5, 4, 7, 3, 9, 1, 6}
 };
 
-// valor inicial 0
-int rows_checked[9];
-int cols_checked[9];
-int sub_grids_checked[9] ;
-
 int main(){
-    struct sdk page = create_the_struct(3,5,3,5);
-    validate(page.init_row,page.fin_row,page.init_col,page.fin_col);
+    struct sdk page = create_the_struct(0,3,0,3);
+    column_assignement(4);
+    column_check();
+    //    gridcheck(3,5,3,5);
     return 0;
 }
+
+// valor inicial 0
+int rows_checked[9] = {0};
+int cols_checked[9] = {0};
+int sub_grids_checked[9] = {0};
 
 struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col){
     struct sdk p1;
@@ -53,11 +69,83 @@ struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_co
     return p1;
 }
 
-void validate(int init_row, int fin_row, int init_col, int fin_col){
-    int cont = 0;
+void row_check(){
+    for (int i = 0; i < 9 ; ++i) {
+        printf("row value: %d \n",rows_checked[i]);
+    }
+}
+
+int row_assignement(int init_row){
+    int cont[8] = {0};
+    int contador = 0;
     for (int i = 0; i < 9; ++i) {
-        for (int j = 0; j < 9; ++j) {
-            printf("%d",sudoku_array[i][j]);
+        if (sudoku_array[init_row][i] <= 9 && sudoku_array[init_row][i]>0){
+            cont[i] = sudoku_array[init_row][i];
+            contador++;
+        } else{
+            rows_checked[init_row] = 1;
+            return 0;
         }
+    }
+    int duplicate = found_duplicate(cont,contador);
+    if (duplicate == 1){
+        rows_checked[init_row] = 1;
+    }else{
+        return 0;
+    }
+    return 0;
+}
+
+int column_assignement(int init_column){
+    int cont[9] = {0};
+    int contador = 0;
+    for (int i = 0; i < 9; ++i) {
+        if (sudoku_array[i][init_column] < 10 && sudoku_array[i][init_column]>0){
+            cont[i] = sudoku_array[i][init_column];
+            contador++;
+        } else{
+            cols_checked[init_column] = 1;
+        }
+    }
+    int duplicate = found_duplicate(cont,contador);
+    if (duplicate == 1){
+        cols_checked[init_column] = 1;
+    }
+    return 0;
+}
+
+int column_check(){
+    for (int i = 0; i < 9 ; ++i) {
+        printf("column value: %d \n",cols_checked[i]);
+    }
+}
+
+void gridcheck(int init_row, int fin_row, int init_col, int fin_col){
+    int cont = 0;
+    for (int i = init_col; i <= fin_col; ++i) {
+        for (int j = init_row; j <= fin_row; ++j) {
+            printf("%d ",sudoku_array[i][j]);
+        }
+    }
+}
+
+int found_duplicate(int cont[], int size){
+    int count=0;
+    for(int i=0; i<size; i++)
+    {
+        for(int j=i+1; j<size; j++)
+        {
+            /* If duplicate found then increment count by 1 */
+            if(cont[i] == cont[j])
+            {
+                count++;
+                break;
+            }
+        }
+    }
+    if (count==0){
+        return count;
+    }else{
+        return 1;
     }
 }
