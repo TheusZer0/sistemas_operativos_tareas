@@ -60,28 +60,39 @@ int sudoku_array[9][9] = {
 };
 
 int main(){
+    /* Tiempo */
     gettimeofday(&tv1, NULL);
-/* stuff to do! */
-    struct sdk page = create_the_struct(1,1,0,8);
+
+    /* MAIN */
+    struct sdk page = create_the_struct(3,4,2,4);
     validity_check(page);
+
+    /* Tiempo */
     gettimeofday(&tv2, NULL);
     printf("Time = %f sec\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec));
     return 0;
 }
 
 int validity_check(struct sdk page){
+    int respuesta = 0;
 
+    /* revisa el array bi-dimensional */
     column_assignement(page.init_col,page.fin_col);
     row_assignement(page.init_row,page.fin_col);
+
+    /* crear un primer if que revisa rows y columns*/
     if (column_check() == 1 || row_check() == 1){
-        printf("Sudoku Malo");
+        respuesta = 1;
+    }else{
+        respuesta = 0;
     }
-    if (grid_check(6,8,0,2) == 0){
-        printf("Cuadricula Buena");
+    if (grid_check(page.init_row,page.fin_row,page.init_col,page.fin_col) == 0 || respuesta==0){
+        printf("Sudoku Bueno\n");
     }else{
         printf("Sudoku Malo");
         return EXIT_FAILURE;
     };
+
 }
 
 struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col){
