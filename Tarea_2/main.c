@@ -1,97 +1,115 @@
-//
-// Created by theuszero on 12/20/20.
-//
-
-#include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include <sys/time.h>
 
-struct timeval tv1, tv2;
+int sudoku_array[9][9] =  {
+        {6, 2, 4, 5, 3, 9, 1, 8, 7},
+        {5, 1, 9, 7, 2, 8, 6, 3, 4},
+        {8, 3, 7, 6, 1, 4, 2, 9, 5},
+        {1, 4, 3, 8, 6, 5, 7, 2, 9},
+        {9, 5, 8, 2, 4, 7, 3, 6, 1},
+        {7, 6, 2, 3, 9, 1, 4, 5, 8},
+        {3, 7, 1, 9, 5, 6, 8, 4, 2},
+        {4, 9, 6, 1, 8, 2, 5, 7, 3},
+        {2, 8, 5, 4, 7, 3, 9, 1, 6}
+};
 
-struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col);
+int rows_checked[9] = {0};
+int cols_checked[9] = {0};
+int sub_grids_checked[9] = {0};
 
-int nro_grid(int inicio_x, int fin_x, int inicio_y, int fin_y);
-
-int grid_check(int inicio_x, int fin_x, int inicio_y, int fin_y);
-
-int validity_check(struct sdk page);
-
-/* Row */
-int row_assignement(int init_row, int fin_row);
-
-int row_check();
-
-/* Column */
-
-int column_assignement(int init_column, int fin_column);
-
-int column_check();
-
-/* Others */
-
-int found_duplicate(int cont[], int size);
-
-
-struct sdk
-{
+struct sdk{
     int init_row; // fila inicial
     int fin_row; // fila final
     int init_col; // columna inicial
     int fin_col; // columna final
 };
 
-// valor inicial 0
-int rows_checked[9] = {0};
-int cols_checked[9] = {0};
-int sub_grids_checked[9] = {0};
+void validity_check(struct sdk); //chequea solucion de sudoku
 
-int sudoku_array[9][9] = {
-        {6, 2, 4, 5, 3, 9, 1, 8, 7},
-        {5, 1, 9, 7, 2, 8, 6, 3, 4},
-        {8, 3, 7, 6, 1, 4, 2, 9, 5},
-        {1, 4, 3, 8, 6, 5, 7, 2, 9},
-        {9, 5, 8, 2, 4, 7, 3, 6, 1},
-        {7, 6, 2, 3, 1, 1, 4, 5, 8},
-        {3, 7, 1, 9, 5, 6, 8, 4, 2},
-        {4, 9, 6, 1, 8, 2, 5, 7, 3},
-        {2, 8, 5, 4, 7, 3, 9, 1, 6}
-};
+void col_check(struct sdk);  // chequea columnas
+
+void row_check(struct sdk); // chequea filas
+
+void grid_check(struct sdk); //chequea los sub cuadrados
+
+int nro_grid(struct sdk);
+
+struct sdk create_the_struct(int, int, int, int);
 
 int main(){
-    /* Tiempo */
+    struct timeval tv1, tv2;
     gettimeofday(&tv1, NULL);
+    for (int k = 0; k < 9; k++)
+        printf("row: %d col: %d grid: %d\n",rows_checked[k], cols_checked[k], sub_grids_checked[k]);
 
-    /* MAIN */
-    struct sdk page = create_the_struct(3,4,2,4);
-    validity_check(page);
+    struct sdk grid0 = create_the_struct(0,2,0,2);
+    struct sdk grid1 = create_the_struct(0,2,3,5);
+    struct sdk grid2 = create_the_struct(0,2,6,8);
+    struct sdk grid3 = create_the_struct(3,5,0,2);
+    struct sdk grid4 = create_the_struct(3,5,3,5);
+    struct sdk grid5 = create_the_struct(3,5,6,8);
+    struct sdk grid6 = create_the_struct(6,8,0,2);
+    struct sdk grid7 = create_the_struct(6,8,3,5);
+    struct sdk grid8 = create_the_struct(6,8,6,8);
 
-    /* Tiempo */
+
+    struct sdk row0 = create_the_struct(0,0,0,8);
+    struct sdk row1 = create_the_struct(1,1,0,8);
+    struct sdk row2 = create_the_struct(2,2,0,8);
+    struct sdk row3 = create_the_struct(3,3,0,8);
+    struct sdk row4 = create_the_struct(4,4,0,8);
+    struct sdk row5 = create_the_struct(5,5,0,8);
+    struct sdk row6 = create_the_struct(6,6,0,8);
+    struct sdk row7 = create_the_struct(7,7,0,8);
+    struct sdk row8 = create_the_struct(8,8,0,8);
+
+    struct sdk col0 = create_the_struct(0,8,0,0);
+    struct sdk col1 = create_the_struct(0,8,1,1);
+    struct sdk col2 = create_the_struct(0,8,2,2);
+    struct sdk col3 = create_the_struct(0,8,3,3);
+    struct sdk col4 = create_the_struct(0,8,4,4);
+    struct sdk col5 = create_the_struct(0,8,5,5);
+    struct sdk col6 = create_the_struct(0,8,6,6);
+    struct sdk col7 = create_the_struct(0,8,7,7);
+    struct sdk col8 = create_the_struct(0,8,8,8);
+
+    validity_check(grid0);
+    validity_check(grid1);
+    validity_check(grid2);
+    validity_check(grid3);
+    validity_check(grid4);
+    validity_check(grid5);
+    validity_check(grid6);
+    validity_check(grid7);
+    validity_check(grid8);
+
+    validity_check(row0);
+    validity_check(row1);
+    validity_check(row2);
+    validity_check(row3);
+    validity_check(row4);
+    validity_check(row5);
+    validity_check(row6);
+    validity_check(row7);
+    validity_check(row8);
+
+    validity_check(col0);
+    validity_check(col1);
+    validity_check(col2);
+    validity_check(col3);
+    validity_check(col4);
+    validity_check(col5);
+    validity_check(col6);
+    validity_check(col7);
+    validity_check(col8);
+
+    for (int k = 0; k < 9; k++)
+        printf("row: %d col: %d grid: %d\n",rows_checked[k], cols_checked[k], sub_grids_checked[k]);
+
     gettimeofday(&tv2, NULL);
-    printf("Time = %f sec\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec));
-    return 0;
-}
-
-int validity_check(struct sdk page){
-    int respuesta = 0;
-
-    /* revisa el array bi-dimensional */
-    column_assignement(page.init_col,page.fin_col);
-    row_assignement(page.init_row,page.fin_col);
-
-    /* crear un primer if que revisa rows y columns*/
-    if (column_check() == 1 || row_check() == 1){
-        respuesta = 1;
-    }else{
-        respuesta = 0;
-    }
-    if (grid_check(page.init_row,page.fin_row,page.init_col,page.fin_col) == 0 || respuesta==0){
-        printf("Sudoku Bueno\n");
-    }else{
-        printf("Sudoku Malo");
-        return EXIT_FAILURE;
-    };
+    printf ("Time = %f sec\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec));
 
 }
 
@@ -104,89 +122,71 @@ struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_co
     return p1;
 }
 
-int row_check(){
-    for (int i = 0; i < 9 ; ++i) {
-        if (rows_checked[i] == 1){
-            return 1;
-        }
+void validity_check(struct sdk sudoku){
+    if (sudoku.init_row == sudoku.fin_row) {
+        /* chequea fila */
+        row_check(sudoku);
+    }
+    else if (sudoku.init_col == sudoku.fin_col) {
+        /* chequea columna */
+        col_check(sudoku);
+    }
+    else {
+        /* chequea grid */
+        grid_check(sudoku);
     }
 }
 
-int row_assignement(int init_row, int fin_column){
-    int cont[9] = {0};
-    int contador = 0;
-    for (int i = 0; i <= fin_column; ++i) {
-        if (sudoku_array[init_row][i] <= 9 && sudoku_array[init_row][i]>0){
-            cont[i] = sudoku_array[init_row][i];
-            contador++;
-        } else{
-            rows_checked[init_row] = 1;
-            return 0;
-        }
-    }
-    int duplicate = found_duplicate(cont,contador);
-    if (duplicate == 1){
-        rows_checked[init_row] = 1;
-    }else{
-        return 0;
-    }
-    return 0;
-}
-
-int column_assignement(int init_column,int fin_col){
-    int cont[9] = {0};
-    int contador = 0;
-    for (int i = 0; i <= fin_col; ++i) {
-        if (sudoku_array[i][init_column] < 10 && sudoku_array[i][init_column]>0){
-            cont[i] = sudoku_array[i][init_column];
-            contador++;
-        } else{
-            cols_checked[init_column] = 1;
-        }
-    }
-    int duplicate = found_duplicate(cont,contador);
-    if (duplicate == 1){
-        cols_checked[init_column] = 1;
-    }
-    return 0;
-}
-
-int column_check(){
-    for (int i = 0; i < 9 ; ++i) {
-        if (cols_checked[i]==1){
-            return 1;
-        }
-    }
-}
-
-int found_duplicate(int cont[], int size){
-    int count=0;
-    for(int i=0; i<size; i++)
-    {
-        for(int j=i+1; j<size; j++)
-        {
-            /* If duplicate found then increment count by 1 */
-            if(cont[i] == cont[j])
-            {
-                count++;
-                break;
-            }
-        }
-    }
-    if (count==0){
-        return count;
-    }else{
-        return 1;
-    }
-}
-
-int grid_check(int inicio_x, int fin_x, int inicio_y, int fin_y) {
-    int var, k, x, y;
-    int index = nro_grid(inicio_x, fin_x, inicio_y, fin_y);
+void row_check(struct sdk sudoku){
     int tmp[9] = {0};
-    for (x = inicio_x; x <= fin_x; x++) {
+    int k,var;
+    for (k = sudoku.init_col; k <= sudoku.fin_col; k++) {
+        /* recorre las columnas y actualiza el arreglo temporal */
+        var = sudoku_array[sudoku.init_row][k];
+        tmp[var - 1] = 1;
+    }
+    for (k = 0; k < 9; k++) {
+        /* consulta el arreglo temporal */
+        if (tmp[k] == 0){
+            /* si la columna esta correcta, actualiza el arreglo global */
+            rows_checked[sudoku.init_row] = 0;
+            break;
+        }
+        else {
+            rows_checked[sudoku.init_row] = 1;
+        }
+    }
 
-        for (y = inicio_y; y <= fin_y; y++) {
+}
+
+void col_check(struct sdk sudoku){
+    int tmp[9] = {0};
+    int k,var;
+    for (k = sudoku.init_row; k <= sudoku.fin_row; k++) {
+        /* recorre las columnas y actualiza el arreglo temporal */
+        var = sudoku_array[k][sudoku.init_col];
+        tmp[var - 1] = 1;
+    }
+    for (k = 0; k < 9; k++) {
+        /* consulta el arreglo temporal */
+        if (tmp[k] == 0){
+            /* si la columna esta correcta, actualiza el arreglo global */
+            cols_checked[sudoku.init_col] = 0;
+            break;
+        }
+        else {
+            cols_checked[sudoku.init_col] = 1;
+        }
+    }
+}
+
+void grid_check(struct sdk sudoku) {
+    int var, k, x, y;
+    int index = nro_grid(sudoku);
+    int tmp[9] = {0};
+    for (x = sudoku.init_row; x <= sudoku.fin_row; x++) {
+
+        for (y = sudoku.init_col; y <= sudoku.fin_col; y++) {
             /* Se recorre de fila en fila */
             var = sudoku_array[x][y];
 
@@ -197,32 +197,31 @@ int grid_check(int inicio_x, int fin_x, int inicio_y, int fin_y) {
         /* Se revisa el arreglo temporal, si falto algun nro, su posicion tendra valor 0 */
         if (tmp[k] == 0) {
             sub_grids_checked[index] = 0;
-            return 1;
+            break;
         }
         else {
             sub_grids_checked[index] = 1;
-            return 0;
         }
     }
 }
 
-int nro_grid(int inicio_x, int fin_x, int inicio_y, int fin_y){
+int nro_grid(struct sdk sudoku){
 
-    if (inicio_x == 0 && fin_x == 2 && inicio_y == 0 && fin_y == 2) return 0;
+    if (sudoku.init_row == 0 && sudoku.fin_row == 2 && sudoku.init_col == 0 && sudoku.fin_col == 2) return 0;
 
-    if (inicio_x == 0 && fin_x == 2 && inicio_y == 3 && fin_y == 5) return 1;
+    if (sudoku.init_row == 0 && sudoku.fin_row == 2 && sudoku.init_col == 3 && sudoku.fin_col == 5) return 1;
 
-    if (inicio_x == 0 && fin_x == 2 && inicio_y == 6 && fin_y == 8) return 2;
+    if (sudoku.init_row == 0 && sudoku.fin_row == 2 && sudoku.init_col == 6 && sudoku.fin_col == 8) return 2;
 
-    if (inicio_x == 3 && fin_x == 5 && inicio_y == 0 && fin_y == 2) return 3;
+    if (sudoku.init_row == 3 && sudoku.fin_row == 5 && sudoku.init_col == 0 && sudoku.fin_col == 2) return 3;
 
-    if (inicio_x == 3 && fin_x == 5 && inicio_y == 3 && fin_y == 5) return 4;
+    if (sudoku.init_row == 3 && sudoku.fin_row == 5 && sudoku.init_col == 3 && sudoku.fin_col == 5) return 4;
 
-    if (inicio_x == 3 && fin_x == 5 && inicio_y == 6 && fin_y == 8) return 5;
+    if (sudoku.init_row == 3 && sudoku.fin_row == 5 && sudoku.init_col == 6 && sudoku.fin_col == 8) return 5;
 
-    if (inicio_x == 6 && fin_x == 8 && inicio_y == 0 && fin_y == 2) return 6;
+    if (sudoku.init_row == 6 && sudoku.fin_row == 8 && sudoku.init_col == 0 && sudoku.fin_col == 2) return 6;
 
-    if (inicio_x == 6 && fin_x == 8 && inicio_y == 3 && fin_y == 5) return 7;
+    if (sudoku.init_row == 6 && sudoku.fin_row == 8 && sudoku.init_col == 3 && sudoku.fin_col == 5) return 7;
 
-    if (inicio_x == 6 && fin_x == 8 && inicio_y == 6 && fin_y == 8) return 8;
+    if (sudoku.init_row == 6 && sudoku.fin_row == 8 && sudoku.init_col == 6 && sudoku.fin_col == 8) return 8;
 }
