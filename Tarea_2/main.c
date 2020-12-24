@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <sys/time.h>
 
@@ -15,6 +14,8 @@ int sudoku_array[9][9] =  {
         {2, 8, 5, 4, 7, 3, 9, 1, 6}
 };
 
+double sub_main();
+
 int rows_checked[9] = {0};
 int cols_checked[9] = {0};
 int sub_grids_checked[9] = {0};
@@ -27,22 +28,29 @@ struct sdk{
 };
 
 void validity_check(struct sdk); //chequea solucion de sudoku
-
 void col_check(struct sdk);  // chequea columnas
-
 void row_check(struct sdk); // chequea filas
-
 void grid_check(struct sdk); //chequea los sub cuadrados
-
 int nro_grid(struct sdk);
-
 struct sdk create_the_struct(int, int, int, int);
 
 int main(){
+    double arreglo[1000] = {0};
+    double total = 0;
+    for (int i = 0; i < 1000 ; ++i) {
+        arreglo[i] = sub_main();
+    }
+    for (int i = 0; i < 1000; ++i) {
+        total= total+arreglo[i];
+    }
+    total = total/1000;
+    printf("Time = %f sec\n",total);
+}
+
+double sub_main(){
+    int flag = 0;
     struct timeval tv1, tv2;
     gettimeofday(&tv1, NULL);
-    for (int k = 0; k < 9; k++)
-        printf("row: %d col: %d grid: %d\n",rows_checked[k], cols_checked[k], sub_grids_checked[k]);
 
     struct sdk grid0 = create_the_struct(0,2,0,2);
     struct sdk grid1 = create_the_struct(0,2,3,5);
@@ -53,7 +61,6 @@ int main(){
     struct sdk grid6 = create_the_struct(6,8,0,2);
     struct sdk grid7 = create_the_struct(6,8,3,5);
     struct sdk grid8 = create_the_struct(6,8,6,8);
-
 
     struct sdk row0 = create_the_struct(0,0,0,8);
     struct sdk row1 = create_the_struct(1,1,0,8);
@@ -105,12 +112,20 @@ int main(){
     validity_check(col7);
     validity_check(col8);
 
-    for (int k = 0; k < 9; k++)
-        printf("row: %d col: %d grid: %d\n",rows_checked[k], cols_checked[k], sub_grids_checked[k]);
+
+
+    for (int k = 0; k < 9; k++) {
+        if (rows_checked[k] == 0 || cols_checked[k] == 0 || sub_grids_checked[k] == 0){
+            printf("La solucion del sudoku no es valida\n");
+            break;
+        } else if (k == 8)
+            printf("La solucion del sudoku es valida\n");
+    }
 
     gettimeofday(&tv2, NULL);
-    printf ("Time = %f sec\n", (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec));
+    double result = (double) (tv2.tv_usec - tv1.tv_usec) / 1000000.0 + (double) (tv2.tv_sec - tv1.tv_sec);
 
+    return result;
 }
 
 struct sdk create_the_struct(int init_row, int fin_row, int init_col, int fin_col){
