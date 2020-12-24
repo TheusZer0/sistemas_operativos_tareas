@@ -1,3 +1,11 @@
+/*
+* @file: main.c
+* @author: Jared Soto
+ * Robert Parra
+* @date: 24/12/2020
+* @brief: Código para tarea 02 en ELO 321, semestre 2020-2
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -27,23 +35,54 @@ struct sdk{
     int fin_col; // columna final
 };
 
+/**
+ * @brief        : realiza una validacion completa al sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void validity_check(struct sdk); //chequea solucion de sudoku
+
+/**
+ * @brief        : realiza una validacion completa a la columna del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void col_check(struct sdk);  // chequea columnas
+
+/**
+ * @brief        : realiza una validacion completa a la fila del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void row_check(struct sdk); // chequea filas
+
+/**
+ * @brief        : realiza una validacion completa a la fila del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void grid_check(struct sdk); //chequea los sub cuadrados
+
+/**
+ * @brief        : funcion condicional que busca en cual grid estas segun la estructura que le pasas
+ * @param void*: puntero que finalmente apuntara a una struct
+ * @return       : retorna el numero del GRID con respecto a una cuadricula (va del 0-8)
+ */
 int nro_grid(struct sdk);
+
+/**
+ * @brief        : realiza la creacion de una struct
+ * @param int, int, int, int  : recibe los valores que seran almacenados dentro de la struct
+ * @return       : retorna la struct creada
+ */
 struct sdk create_the_struct(int, int, int, int);
 
 int main(){
     double arreglo[1000] = {0};
     double total = 0;
     for (int i = 0; i < 1000 ; ++i) {
-        arreglo[i] = sub_main();
+        arreglo[i] = sub_main(); //se guardan los valores
     }
     for (int i = 0; i < 1000; ++i) {
-        total= total+arreglo[i];
+        total= total+arreglo[i]; // se recorren los valores y se suma a una var
     }
-    total = total/1000;
+    total = total/1000; //se divide por el total
     printf("Time = %f sec\n",total);
 }
 

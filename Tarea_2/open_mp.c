@@ -1,3 +1,11 @@
+/*
+* @file: main.c
+* @author: Jared Soto
+ * Robert Parra
+* @date: 24/12/2020
+* @brief: Código para tarea 02 en ELO 321, semestre 2020-2
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -12,18 +20,48 @@ typedef struct
     int fin_col; // columna final
 }sdk;
 
+/**
+ * @brief        : realiza una medicion del tiempo empleado segun la ejecucion de codigo
+ * @return       : retorna un double que corresponde al tiempo en Segundos que demoro el codigo
+ */
 double sub_main();
 
+/**
+ * @brief        : realiza una validacion completa al sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void *validity_check(void*); //chequea solucion de sudoku
 
+/**
+ * @brief        : realiza una validacion completa a la columna del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void *col_check(void*);  // chequea columnas
 
+/**
+ * @brief        : realiza una validacion completa a la fila del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void *row_check(void*); // chequea filas
 
+/**
+ * @brief        : realiza una validacion completa a la fila del sudoku, entregando un resultado de 1 si es valido con un respectivo mensaje y si no es valido, entrega un valor de 0.
+ * @param void*: puntero que finalmente apuntara a una struct
+ */
 void *grid_check(void*); //chequea los sub cuadrados
 
+/**
+ * @brief        : funcion condicional que busca en cual grid estas segun la estructura que le pasas
+ * @param void*: puntero que finalmente apuntara a una struct
+ * @return       : retorna el numero del GRID con respecto a una cuadricula (va del 0-8)
+ */
 int nro_grid(void*);
 
+/**
+ * @brief        : realiza la creacion de una struct
+ * @param int, int, int, int  : recibe los valores que seran almacenados dentro de la struct
+ * @return       : retorna la struct creada
+ */
 sdk* create_the_struct(int, int, int, int);
 
 int sudoku_array[9][9] =  {
